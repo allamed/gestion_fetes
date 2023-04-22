@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des patients</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+
+
+</head>
+<body>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">Liste des personnes</div>
+        <div class="card-body">
+            <form method="get" th:action="@{ListPersonnes}">
+                <label>Keyword</label>
+                <input type="text" name="keyword">
+                <button type="submit" class="btn btn-primary">chercher</button>
+
+            </form>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>CIN</th><th>Nom</th><th>PRENOM</th><th>SEXE</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="p:${listPersonnes}">
+                    <td th:text ="${p.cin}"></td>
+                    <td th:text ="${p.nom}"></td>
+                    <td th:text ="${p.prenom}"></td>
+                    <td th:text ="${p.genre}"></td>
+
+                </tr>
+                </tbody>
+            </table>
+            <ul class="nav nav-pills">
+                <li th:each="page,status:${pages}">
+                    <a th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
+                       th:text="${status.index}"
+                       th:href="@{ListPersonnes(page=${status.index})}"
+                    ></a>
+
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

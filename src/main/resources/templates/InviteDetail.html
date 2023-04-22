@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail d'un invité</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body>
+<h3>Detail d'un invité</h3>
+<div class="container" >
+    <form th:object="${invite}">
+        <div class="mb-3">
+            <label>CIN</label>
+            <input type="text" class="form-control" th:field="*{cin}" disabled>
+        </div>
+        <div class="mb-3">
+            <label>First name</label>
+            <input type="text" class="form-control" th:field="*{prenom}" disabled>
+        </div>
+        <div class="mb-3">
+            <label>Last name</label>
+            <input type="text" class="form-control" th:field="*{nom}" disabled>
+        </div>
+        <div class="mb-3">
+            <label>Status</label>
+            <input type="text" class="form-control" th:field="*{statut}" disabled>
+        </div>
+        <label>Wedding</label>
+        <select  th:field="*{marriages}" class="form-select" name="permission" multiple disabled>
+            <option th:each="wedding : ${invite.marriages}"
+
+                    th:value="${wedding.num}"
+                    th:text="${wedding.date}+${' '}+${wedding.salle}" />
+        </select>
+
+    </form>
+</div>
+</body>
+</html>

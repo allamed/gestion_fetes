@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire pour  medecin</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body>
+<h3>Mise a jour des données d'un invité</h3>
+<div class="container" >
+    <form th:action="@{/saveInvite}" th:object="${invite}" method="post">
+        <div class="mb-3">
+            <label>CIN</label>
+            <input type="text" class="form-control" th:field="*{cin}">
+        </div>
+        <div class="mb-3">
+            <label>Prenom</label>
+            <input type="text" class="form-control" th:field="*{prenom}" >
+        </div>
+        <div class="mb-3">
+            <label>Nom</label>
+            <input type="text" class="form-control" th:field="*{nom}" >
+        </div>
+        <div class="mb-3">
+            <label>Sexe</label>
+            <input type="text" class="form-control" th:field="*{genre}" >
+        </div>
+        <label>Wedding</label>
+        <select  th:field="*{marriages}" class="form-select" name="permission" multiple>
+            <option th:each="wedding : ${weddingChoiceList}"
+                    th:value="${wedding.num}"
+                    th:text="${wedding.date}+${' '}+${wedding.salle}" />
+        </select>
+        <label>Status</label>
+        <select th:field="*{statut}" name="status" class="form-select">
+            <option th:each="statusOpt: ${T(emi.ma.gestionfete.models.StatusInvite).values()}"
+                    th:value="${statusOpt}" th:text="${statusOpt}"></option>
+        </select>
+        <input type="submit" value="Save" class="btn btn-primary mt-4">
+    </form>
+</div>
+</body>
+</html>
